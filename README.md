@@ -1,80 +1,107 @@
-# 🚖 Careem UAE — Surge Pricing Fairness Analytics Dashboard
+# 🚖 Careem UAE — Surge Pricing Fairness Analytics
 
 > **University Data Analytics Project**  
-> An end-to-end data science investigation into algorithmic fairness in ride-hailing surge pricing.
+> End-to-end investigation into algorithmic fairness in Dubai ride-hailing surge pricing.
 
 ---
 
-## 🔗 Live App
-Deploy to [Streamlit Cloud](https://streamlit.io/cloud) by pushing this repo and connecting it.
+## 🗂️ Repository Structure
+
+```
+careem-surge-analytics/
+├── app.py                        ← Main entry point
+├── requirements.txt              ← Python dependencies
+├── README.md
+│
+├── data/
+│   ├── __init__.py
+│   └── generate_data.py          ← Synthetic dataset generator (3,000 records)
+│
+├── utils/
+│   ├── __init__.py
+│   └── theme.py                  ← Shared CSS, Plotly theme, UI helpers
+│
+└── pages/
+    ├── __init__.py
+    ├── home.py                   ← Hero banner, KPIs, business context
+    ├── dataset_overview.py       ← Preview, schema, quick charts
+    ├── eda.py                    ← Surge, fare, demand, correlation charts
+    ├── classification.py         ← LR, DT, RF, XGBoost — predict Ride_Cancelled
+    ├── clustering.py             ← K-Means (K=4) customer segmentation
+    ├── association_rules.py      ← Apriori pattern mining
+    ├── regression.py             ← Predict Customer Fairness Rating
+    └── bias_detection.py         ← Geographic, income, nationality, vehicle bias
+```
 
 ---
 
-## 📋 Overview
+## 🚀 Run Locally
 
-This Streamlit dashboard analyzes whether **Careem UAE's** surge pricing strategy treats all customers fairly across locations, income groups, and demographics. It uses a 3,000-record synthetic dataset generated with realistic Dubai ride-hailing demand patterns and intentional bias signals.
-
----
-
-## 🗂️ Dashboard Pages
-
-| Page | Description |
-|------|-------------|
-| 🏠 Home | Project overview, KPIs, business context |
-| 📊 Dataset Overview | Schema, preview, quick charts |
-| 🔍 EDA & Visualizations | Surge distributions, demand maps, correlations |
-| 🤖 Classification Models | Logistic Regression, Decision Tree, Random Forest, XGBoost |
-| 🔵 Clustering Analysis | K-Means customer segmentation (4 clusters) |
-| 🔗 Association Rule Mining | Apriori patterns — surge, cancellation, events |
-| 📈 Regression Forecast | Predict Customer Fairness Rating |
-| ⚖️ Bias Detection | Geographic, income, nationality, vehicle type bias |
-
----
-
-## 🚀 Deployment
-
-### Local
 ```bash
+# 1. Clone the repo
+git clone https://github.com/YOUR_USERNAME/careem-surge-analytics.git
+cd careem-surge-analytics
+
+# 2. Install dependencies
 pip install -r requirements.txt
+
+# 3. Run the app
 streamlit run app.py
 ```
 
-### Streamlit Cloud
-1. Push `app.py` and `requirements.txt` to a GitHub repo
+---
+
+## ☁️ Deploy on Streamlit Cloud
+
+1. Push this repository to GitHub (public or private)
 2. Go to [share.streamlit.io](https://share.streamlit.io)
-3. Connect repo → select `app.py` → Deploy
+3. Click **New app** → Select your repo → Set main file to `app.py`
+4. Click **Deploy**
+
+The dataset is **generated automatically at runtime** — no CSV files needed.
 
 ---
 
-## 📦 Dataset
+## 📊 Dashboard Pages
 
-The dataset is **generated automatically** at runtime — no external files needed.
+| Page | What it shows |
+|------|--------------|
+| 🏠 **Home** | Hero banner, 6 KPIs, business context, bias preview |
+| 📊 **Dataset Overview** | Schema, data preview, quick charts, statistics |
+| 🔍 **EDA & Visualizations** | Surge/fare/demand/weather/correlation charts |
+| 🤖 **Classification** | LR · DT · RF · XGBoost — confusion matrices, feature importance |
+| 🔵 **Clustering** | K-Means segments: Price-Sensitive, Commuter, Premium, Event-Based |
+| 🔗 **Association Rules** | Apriori patterns — live-mined or fallback table |
+| 📈 **Regression** | Linear · Ridge · Lasso — fairness rating prediction + coefficients |
+| ⚖️ **Bias Detection** | Zone · income · nationality · vehicle — scorecard + KPIs |
 
-- **3,000** synthetic ride requests
-- **26 columns** covering rider demographics, trip details, surge pricing, and outcomes
-- **Bias patterns embedded**: tourist-zone premiums, residential wait gaps, income-correlated cancellations
-- **Target variable**: `Ride_Cancelled` (Yes / No)
+---
+
+## 🗄️ Dataset
+
+Synthetic 3,000-record ride-hailing dataset for Dubai 2024.
+
+**Key bias patterns embedded:**
+- Tourist-Heavy zones: +15–25% fare premium via higher surge
+- Residential zones: +3.5 min wait due to lower driver acceptance rate
+- Low-income riders: 40% higher cancellation rate from price sensitivity
+- Extreme surge (>2.5×): cancellation probability nearly doubles
+
+**Target variable:** `Ride_Cancelled` (Yes / No)
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Streamlit** — dashboard framework
-- **Pandas / NumPy** — data manipulation
-- **Scikit-learn** — ML models (classification, clustering, regression)
-- **XGBoost** — gradient boosting classifier
-- **Mlxtend** — association rule mining (Apriori)
-- **Plotly** — interactive visualizations
+| Library | Purpose |
+|---------|---------|
+| Streamlit | Dashboard framework |
+| Pandas / NumPy | Data manipulation |
+| Scikit-learn | Classification · Clustering · Regression |
+| XGBoost | Gradient boosting classifier |
+| Mlxtend | Apriori association rule mining |
+| Plotly | All interactive visualisations |
 
 ---
 
-## 🎨 Design
-
-Dark theme inspired by professional BI dashboards:
-- Careem brand colors (green `#1DB954`, teal `#00B4AB`)
-- Syne (display) + DM Sans (body) typography
-- KPI cards, insight callouts, bias scorecard
-
----
-
-*Synthetic data only. No real customer or business data used.*
+*All data is synthetic. No real Careem customer or business data was used.*
