@@ -183,13 +183,27 @@ BG_PAPER = "rgba(13,27,42,0)"
 def T(fig, h=None):
     fig.update_layout(
         paper_bgcolor=BG_PAPER, plot_bgcolor=BG_PLOT,
-        font=dict(color="#CCD6F6", family="DM Sans, sans-serif", size=12),
-        legend=dict(bgcolor="rgba(13,27,42,0.85)", bordercolor="rgba(0,180,171,0.3)", borderwidth=1),
-        margin=dict(l=10, r=10, t=40, b=10),
+        font=dict(color="#E8EDF5", family="DM Sans, sans-serif", size=12),
+        title=dict(font=dict(color="#FFFFFF", size=14, family="DM Sans, sans-serif")),
+        legend=dict(
+            bgcolor="rgba(13,27,42,0.90)",
+            bordercolor="rgba(0,180,171,0.35)",
+            borderwidth=1,
+            font=dict(color="#E8EDF5", size=12),   # bright legend labels
+        ),
+        margin=dict(l=10, r=10, t=44, b=10),
     )
     if h: fig.update_layout(height=h)
-    fig.update_xaxes(gridcolor="rgba(0,180,171,0.10)", zerolinecolor="rgba(0,180,171,0.15)", tickfont=dict(color="#8892B0"))
-    fig.update_yaxes(gridcolor="rgba(0,180,171,0.10)", zerolinecolor="rgba(0,180,171,0.15)", tickfont=dict(color="#8892B0"))
+    fig.update_xaxes(
+        gridcolor="rgba(0,180,171,0.12)", zerolinecolor="rgba(0,180,171,0.18)",
+        tickfont=dict(color="#CCD6F6", size=11),   # brighter tick labels
+        title_font=dict(color="#E8EDF5", size=12), # brighter axis title
+    )
+    fig.update_yaxes(
+        gridcolor="rgba(0,180,171,0.12)", zerolinecolor="rgba(0,180,171,0.18)",
+        tickfont=dict(color="#CCD6F6", size=11),
+        title_font=dict(color="#E8EDF5", size=12),
+    )
     return fig
 
 def kpi(label, value, delta="", icon="", color=None):
